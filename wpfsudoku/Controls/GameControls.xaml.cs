@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,22 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using wpfsudokulib;
-using wpfsudokulib.ViewModels;
 
-namespace wpfsudoku
+namespace wpfsudoku.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GameControls.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameControls : UserControl
     {
-        public ViewModelsAccessor vma { get; set; }
-
-        public MainWindow()
+        public GameControls()
         {
             InitializeComponent();
-            DataContext = new ViewModelsAccessor();
         }
     }
 }

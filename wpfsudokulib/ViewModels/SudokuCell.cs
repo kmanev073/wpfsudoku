@@ -33,7 +33,7 @@ namespace wpfsudokulib.ViewModels
         public SudokuCell(bool highlight)
         {
             Data = null;
-            ReadOnly = true;
+            ReadOnly = false;
             Highlight = highlight;
         }
     }

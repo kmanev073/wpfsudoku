@@ -8,21 +8,7 @@
         mc:Ignorable="d" Title="wpfsudoku" Height="374" Width="481" Icon="sudoku.ico"
         ResizeMode="CanMinimize">
     <Grid>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="57" Margin="345,137,0,0" Stroke="Black" VerticalAlignment="Top" Width="110"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="87" Margin="345,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="110"/>
-        <Button Content="Start a new game" HorizontalAlignment="Left" Margin="345,102,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click"/>
-        <Button Content="Load a saved game" HorizontalAlignment="Left" Margin="345,259,0,0" VerticalAlignment="Top" Width="110"/>
-        <Button Content="Save this game" HorizontalAlignment="Left" Margin="345,199,0,0" VerticalAlignment="Top" Width="110"/>
-        <Button Content="Undo" HorizontalAlignment="Left" Margin="345,284,0,0" VerticalAlignment="Top" Width="52"/>
-        <Button Content="Redo" HorizontalAlignment="Left" Margin="403,284,0,0" VerticalAlignment="Top" Width="52"/>
-        <Label x:Name="lblElapsedTime" Content="Elapsed time:" HorizontalAlignment="Left" Margin="345,137,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rbEasy" Content="Easy" HorizontalAlignment="Left" Margin="350,36,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <RadioButton x:Name="rbMedium" Content="Medium" HorizontalAlignment="Left" Margin="350,56,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rbHard" Content="Hard" HorizontalAlignment="Left" Margin="350,76,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblDifficulty" Content="Game difficulty:" HorizontalAlignment="Left" Margin="345,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblTime" HorizontalContentAlignment="Center" Content="24:24:24" HorizontalAlignment="Left" Margin="345,153,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Width="110"/>
-        <ListBox HorizontalAlignment="Left" Height="20" Margin="345,234,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Good luck!" HorizontalAlignment="Left" Margin="345,304,0,0" VerticalAlignment="Top"/>
+        <controls:GameControls Margin="346,10,0,0"/>
         <controls:SudokuGrid DataContext="{Binding SudokuBoardViewModel}" x:Name="sudokuGrid" Margin="10,10,128,10"/>
     </Grid>
 </Window>
