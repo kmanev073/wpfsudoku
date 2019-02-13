@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfsudokulib;
+using wpfsudokulib.ViewModels;
 
 namespace wpfsudoku
 {
@@ -21,46 +25,19 @@ namespace wpfsudoku
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableCollection<A> asd { get; set; } = new ObservableCollection<A>()
-        {
-            new A(new bool[] { true, true, true, false, false, false, true, true, true }),
-            new A(new bool[] { true, true, true, false, false, false, true, true, true }),
-            new A(new bool[] { true, true, true, false, false, false, true, true, true }),
-            new A(new bool[] { false, false, false, true, true, true, false, false, false }),
-            new A(new bool[] { false, false, false, true, true, true, false, false, false }),
-            new A(new bool[] { false, false, false, true, true, true, false, false, false }),
-            new A(new bool[] { true, true, true, false, false, false, true, true, true }),
-            new A(new bool[] { true, true, true, false, false, false, true, true, true }),
-            new A(new bool[] { true, true, true, false, false, false, true, true, true }),
-        };
+        public ViewModelsAccessor vma { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = asd;
+            vma = new ViewModelsAccessor();
+            DataContext = vma;
         }
 
-        private void DgBoard_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var saddd = e.Row.Item as A;
-            if (saddd.CanEdit[e.Column.DisplayIndex] == false)
-            {
-                e.Cancel = true;
-            }
-        }
-    }
-
-    class A
-    {
-        public byte?[] a { get; set; } = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
-        public bool[] CanEdit { get; set; } = { true, true, true, false, false, false, true, true, true };
-
-        public bool[] Highlight { get; set; }
-
-        public A(bool[] highlight)
-        {
-            Highlight = highlight;
+            vma.SudokuBoardViewModel.Rows[0][0].Data = 5;
+            vma.SudokuBoardViewModel.Rows[0][0].ReadOnly = false;
         }
     }
 }

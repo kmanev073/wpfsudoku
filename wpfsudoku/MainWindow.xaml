@@ -4,233 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfsudoku"
-        xmlns:vr="clr-namespace:wpfsudoku.ValidationRules"
-        mc:Ignorable="d" Title="wpfsudoku" Height="374" Width="800" Icon="sudoku.ico"
+        xmlns:controls="clr-namespace:wpfsudoku.Controls"
+        mc:Ignorable="d" Title="wpfsudoku" Height="374" Width="481" Icon="sudoku.ico"
         ResizeMode="CanMinimize">
     <Grid>
-        <DataGrid x:Name="dgBoard" HorizontalAlignment="Left" Width="325" Height="315"
-                  Margin="10,10,0,0" VerticalAlignment="Top"  HeadersVisibility="None"
-                  FontSize="24" VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding}"
-                  HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False"
-                  AutoGenerateColumns="False" BeginningEdit="DgBoard_BeginningEdit">
-            <DataGrid.Columns>
-                <DataGridTextColumn Width="36">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding CanEdit[0]}" Value="False">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Highlight[0]}" Value="True">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="a[0]" TargetNullValue="">
-                            <Binding.ValidationRules>
-                                <vr:SudokuCellValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="36">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding CanEdit[1]}" Value="False">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Highlight[1]}" Value="True">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="a[1]" TargetNullValue="">
-                            <Binding.ValidationRules>
-                                <vr:SudokuCellValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="36">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding CanEdit[2]}" Value="False">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Highlight[2]}" Value="True">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="a[2]" TargetNullValue="">
-                            <Binding.ValidationRules>
-                                <vr:SudokuCellValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="36">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding CanEdit[3]}" Value="False">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Highlight[3]}" Value="True">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="a[3]" TargetNullValue="">
-                            <Binding.ValidationRules>
-                                <vr:SudokuCellValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="36">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding CanEdit[4]}" Value="False">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Highlight[4]}" Value="True">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="a[4]" TargetNullValue="">
-                            <Binding.ValidationRules>
-                                <vr:SudokuCellValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="36">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding CanEdit[5]}" Value="False">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Highlight[5]}" Value="True">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="a[5]" TargetNullValue="">
-                            <Binding.ValidationRules>
-                                <vr:SudokuCellValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="36">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding CanEdit[6]}" Value="False">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Highlight[6]}" Value="True">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="a[6]" TargetNullValue="">
-                            <Binding.ValidationRules>
-                                <vr:SudokuCellValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="36">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding CanEdit[7]}" Value="False">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Highlight[7]}" Value="True">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="a[7]" TargetNullValue="">
-                            <Binding.ValidationRules>
-                                <vr:SudokuCellValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="36">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding CanEdit[8]}" Value="False">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Highlight[8]}" Value="True">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="a[8]" TargetNullValue="">
-                            <Binding.ValidationRules>
-                                <vr:SudokuCellValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-            <DataGrid.Resources>
-                <ResourceDictionary>
-                    <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
-                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
-                        <Setter Property="Background" Value="White" />
-                        <Setter Property="BorderBrush" Value="White" />
-                        <Setter Property="Foreground" Value="Black" />
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="White" />
-                                <Setter Property="BorderBrush" Value="White" />
-                                <Setter Property="Foreground" Value="Black" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                    <Style TargetType="{x:Type DataGridRow}">
-                        <Setter Property="Background" Value="{x:Null}" />
-                        <Setter Property="BorderBrush" Value="{x:Null}" />
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{x:Null}" />
-                                <Setter Property="BorderBrush" Value="{x:Null}" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ResourceDictionary>
-            </DataGrid.Resources>
-        </DataGrid>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="57" Margin="345,137,0,0" Stroke="Black" VerticalAlignment="Top" Width="110"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="87" Margin="345,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="110"/>
+        <Button Content="Start a new game" HorizontalAlignment="Left" Margin="345,102,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click"/>
+        <Button Content="Load a saved game" HorizontalAlignment="Left" Margin="345,259,0,0" VerticalAlignment="Top" Width="110"/>
+        <Button Content="Save this game" HorizontalAlignment="Left" Margin="345,199,0,0" VerticalAlignment="Top" Width="110"/>
+        <Button Content="Undo" HorizontalAlignment="Left" Margin="345,284,0,0" VerticalAlignment="Top" Width="52"/>
+        <Button Content="Redo" HorizontalAlignment="Left" Margin="403,284,0,0" VerticalAlignment="Top" Width="52"/>
+        <Label x:Name="lblElapsedTime" Content="Elapsed time:" HorizontalAlignment="Left" Margin="345,137,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbEasy" Content="Easy" HorizontalAlignment="Left" Margin="350,36,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <RadioButton x:Name="rbMedium" Content="Medium" HorizontalAlignment="Left" Margin="350,56,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbHard" Content="Hard" HorizontalAlignment="Left" Margin="350,76,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDifficulty" Content="Game difficulty:" HorizontalAlignment="Left" Margin="345,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTime" HorizontalContentAlignment="Center" Content="24:24:24" HorizontalAlignment="Left" Margin="345,153,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Width="110"/>
+        <ListBox HorizontalAlignment="Left" Height="20" Margin="345,234,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label Content="Good luck!" HorizontalAlignment="Left" Margin="345,304,0,0" VerticalAlignment="Top"/>
+        <controls:SudokuGrid DataContext="{Binding SudokuBoardViewModel}" x:Name="sudokuGrid" Margin="10,10,128,10"/>
     </Grid>
 </Window>
