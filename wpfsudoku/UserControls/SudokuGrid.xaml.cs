@@ -25,6 +25,8 @@ namespace wpfsudoku.UserControls
     /// </summary>
     public partial class SudokuGrid : UserControl
     {
+        #region Constructors
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -32,7 +34,11 @@ namespace wpfsudoku.UserControls
         {
             InitializeComponent();
         }
-        
+
+        #endregion
+
+        #region EventHandlers
+
         /// <summary>
         /// Prevents the editing of readonly cells.
         /// </summary>
@@ -77,5 +83,7 @@ namespace wpfsudoku.UserControls
             }
             mvm.GameStateViewModel.Undo.Add(rows);
         }
+
+        #endregion
     }
 }

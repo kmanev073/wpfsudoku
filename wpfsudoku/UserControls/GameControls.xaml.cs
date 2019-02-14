@@ -20,6 +20,8 @@ namespace wpfsudoku.UserControls
     /// </summary>
     public partial class GameControls : UserControl
     {
+        #region Constructors
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -27,5 +29,7 @@ namespace wpfsudoku.UserControls
         {
             InitializeComponent();
         }
+
+        #endregion
     }
 }
