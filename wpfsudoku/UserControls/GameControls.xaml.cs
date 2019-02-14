@@ -20,6 +20,9 @@ namespace wpfsudoku.UserControls
     /// </summary>
     public partial class GameControls : UserControl
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public GameControls()
         {
             InitializeComponent();

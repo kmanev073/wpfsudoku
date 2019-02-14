@@ -27,10 +27,15 @@ namespace wpfsudoku
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModelsAccessor(new GameStateRepository("wpfsudoku.db"), new SudokuService());
+
+            //Initialize MainViewModel and pass GameStateRepository and SodokuService (Constructor DI)
+            DataContext = new MainViewModel(new GameStateRepository("wpfsudoku.db"), new SudokuService());
         }
     }
 }

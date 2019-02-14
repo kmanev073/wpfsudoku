@@ -11,7 +11,7 @@ using wpfsudokulib.ViewModels;
 namespace wpfsudokulib
 {
     [AddINotifyPropertyChangedInterface]
-    public class ViewModelsAccessor
+    public class MainViewModel
     {
         private readonly GameStateRepository _gameStateRepository;
 
@@ -33,7 +33,7 @@ namespace wpfsudokulib
 
         public GameCommand EditCellCommand { get; private set; }
 
-        public ViewModelsAccessor(GameStateRepository gameStateRepository, SudokuService sudokuService)
+        public MainViewModel(GameStateRepository gameStateRepository, SudokuService sudokuService)
         {
             _gameStateRepository = gameStateRepository;
             SudokuService = sudokuService;

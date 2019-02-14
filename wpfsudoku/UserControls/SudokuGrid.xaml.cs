@@ -25,11 +25,19 @@ namespace wpfsudoku.UserControls
     /// </summary>
     public partial class SudokuGrid : UserControl
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public SudokuGrid()
         {
             InitializeComponent();
         }
         
+        /// <summary>
+        /// Prevents the editing of readonly cells.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DgBoard_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
             var row = e.Row.Item as SudokuRow;
@@ -39,21 +47,31 @@ namespace wpfsudoku.UserControls
             }
         }
 
+        /// <summary>
+        /// Called when a cell is edited. Invokes the EditCellCommand in the ViewModel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DgBoard_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            var vma = DataContext as ViewModelsAccessor;
-            vma.EditCellCommand.Execute(null);
+            var mvm = DataContext as MainViewModel;
+            mvm.EditCellCommand.Execute(null);
         }
 
+        /// <summary>
+        /// Called just before the ViewModel update. Used to store the old grid state.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DgBoard_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            var vma = DataContext as ViewModelsAccessor;
+            var mvm = DataContext as MainViewModel;
             var rows = new List<SudokuRow>();
             for (int i = 0; i < 9; i++)
             {
-                rows.Add(new SudokuRow(vma.SudokuBoardViewModel.Rows[i]));
+                rows.Add(new SudokuRow(mvm.SudokuBoardViewModel.Rows[i]));
             }
-            vma.GameStateViewModel.Undo.Add(rows);
+            mvm.GameStateViewModel.Undo.Add(rows);
         }
     }
 }

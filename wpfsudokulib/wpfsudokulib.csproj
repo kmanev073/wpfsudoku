@@ -58,7 +58,7 @@
     <Compile Include="Repositories\GameStateRepository.cs" />
     <Compile Include="Services\SudokuService.cs" />
     <Compile Include="ViewModels\GameStateViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelsAccessor.cs" />
+    <Compile Include="ViewModels\MainViewModels.cs" />
     <Compile Include="ViewModels\SudokuBoardViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\SudokuCell.cs" />
