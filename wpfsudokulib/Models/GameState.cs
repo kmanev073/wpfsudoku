@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,9 @@ namespace wpfsudokulib.Models
 
         public DateTime SaveTimestamp { get; set; }
 
-        public Stack<Move> Undo { get; set; }
+        public List<List<SudokuRow>> Undo { get; set; }
 
-        public Stack<Move> Redo { get; set; }
+        public List<List<SudokuRow>> Redo { get; set; }
 
         public GameStatuses Status { get; set; }
 
@@ -38,8 +39,8 @@ namespace wpfsudokulib.Models
         {
             Id = Guid.NewGuid();
             Difficulty = difficulty;
-            Undo = new Stack<Move>();
-            Redo = new Stack<Move>();
+            Undo = new List<List<SudokuRow>>();
+            Redo = new List<List<SudokuRow>>();
             Status = GameStatuses.Playing;
             SudokuBoard = sudokuService.GenerateNew(difficulty);
             ReadOnly = new bool[81];

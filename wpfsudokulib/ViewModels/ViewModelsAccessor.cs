@@ -1,4 +1,5 @@
 ﻿using PropertyChanged;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using wpfsudokulib.Commands;
 using wpfsudokulib.Enums;
@@ -30,7 +31,7 @@ namespace wpfsudokulib
 
         public GameCommand RedoCommand { get; private set; }
 
-        public GameCommand CheckCommand { get; private set; }
+        public GameCommand EditCellCommand { get; private set; }
 
         public ViewModelsAccessor(GameStateRepository gameStateRepository, SudokuService sudokuService)
         {
@@ -45,7 +46,7 @@ namespace wpfsudokulib
             LoadGameCommand = new GameCommand(LoadGame);
             UndoCommand = new GameCommand(Undo);
             RedoCommand = new GameCommand(Redo);
-            CheckCommand = new GameCommand(Check);
+            EditCellCommand = new GameCommand(EditCell);
         }
 
         private void StartGame()
@@ -90,20 +91,55 @@ namespace wpfsudokulib
 
         private void Undo()
         {
-            if (GameStateViewModel.Status != GameStatuses.Playing)
+            if (GameStateViewModel.Status != GameStatuses.Playing || GameStateViewModel.Undo.Count == 0)
             {
                 return;
             }
+
+            var rows = new List<SudokuRow>();
+            for (int i = 0; i < 9; i++)
+            {
+                rows.Add(new SudokuRow(SudokuBoardViewModel.Rows[i]));
+            }
+            GameStateViewModel.Redo.Add(rows);
+            var oldBoard = GameStateViewModel.Undo[GameStateViewModel.Undo.Count - 1];
+            GameStateViewModel.Undo.RemoveAt(GameStateViewModel.Undo.Count - 1);
+
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    SudokuBoardViewModel.Rows[i][j].Data = oldBoard[i][j].Data;
+                }
+            }
         }
+
         private void Redo()
         {
-            if (GameStateViewModel.Status != GameStatuses.Playing)
+            if (GameStateViewModel.Status != GameStatuses.Playing || GameStateViewModel.Redo.Count == 0)
             {
                 return;
+            }
+
+            var rows = new List<SudokuRow>();
+            for (int i = 0; i < 9; i++)
+            {
+                rows.Add(new SudokuRow(SudokuBoardViewModel.Rows[i]));
+            }
+            GameStateViewModel.Undo.Add(rows);
+            var newBoard = GameStateViewModel.Redo[GameStateViewModel.Redo.Count - 1];
+            GameStateViewModel.Redo.RemoveAt(GameStateViewModel.Redo.Count - 1);
+
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    SudokuBoardViewModel.Rows[i][j].Data = newBoard[i][j].Data;
+                }
             }
         }
         
-        private void Check()
+        private void EditCell()
         {
             var board = new byte?[81];
 
@@ -119,6 +155,7 @@ namespace wpfsudokulib
             {
                 GameStateViewModel.Status = GameStatuses.Finished;
                 GameStateViewModel.StopTimer();
+                return;
             }
         }
     }

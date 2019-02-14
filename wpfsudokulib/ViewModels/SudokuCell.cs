@@ -16,7 +16,12 @@ namespace wpfsudokulib.ViewModels
         public bool ReadOnly { get; set; }
 
         public bool Highlight { get; set; }
-        
+
+        public SudokuCell()
+        {
+
+        }
+
         public SudokuCell(byte? data, bool readOnly, bool highlight)
         {
             Data = data;

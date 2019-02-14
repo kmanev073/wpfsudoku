@@ -32,9 +32,9 @@ namespace wpfsudokulib.ViewModels
 
         public Guid? SelectedGameId { get; set; }
 
-        public Stack<Move> Undo { get; set; }
+        public List<List<SudokuRow>> Undo { get; set; }
 
-        public Stack<Move> Redo { get; set; }
+        public List<List<SudokuRow>> Redo { get; set; }
 
         public GameStatuses Status { get; set; }
 
@@ -58,7 +58,7 @@ namespace wpfsudokulib.ViewModels
             
             Undo = gameState.Undo;
 
-            Undo = gameState.Redo;
+            Redo = gameState.Redo;
 
             Status = gameState.Status;
         }

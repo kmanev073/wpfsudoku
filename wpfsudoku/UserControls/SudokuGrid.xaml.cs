@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -41,7 +42,18 @@ namespace wpfsudoku.UserControls
         private void DgBoard_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             var vma = DataContext as ViewModelsAccessor;
-            vma.CheckCommand.Execute(null);
+            vma.EditCellCommand.Execute(null);
+        }
+
+        private void DgBoard_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            var vma = DataContext as ViewModelsAccessor;
+            var rows = new List<SudokuRow>();
+            for (int i = 0; i < 9; i++)
+            {
+                rows.Add(new SudokuRow(vma.SudokuBoardViewModel.Rows[i]));
+            }
+            vma.GameStateViewModel.Undo.Add(rows);
         }
     }
 }

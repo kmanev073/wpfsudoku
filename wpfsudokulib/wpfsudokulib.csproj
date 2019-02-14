@@ -55,7 +55,6 @@
     <Compile Include="Enums\GameDifficulties .cs" />
     <Compile Include="Enums\GameStatuses.cs" />
     <Compile Include="Models\GameState.cs" />
-    <Compile Include="Models\Move.cs" />
     <Compile Include="Repositories\GameStateRepository.cs" />
     <Compile Include="Services\SudokuService.cs" />
     <Compile Include="ViewModels\GameStateViewModel.cs" />

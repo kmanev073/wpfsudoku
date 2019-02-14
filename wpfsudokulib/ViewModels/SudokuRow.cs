@@ -11,6 +11,11 @@ namespace wpfsudokulib.ViewModels
     {        
         public ObservableCollection<SudokuCell> Cells { get; set; }
 
+        public SudokuRow()
+        {
+
+        }
+
         public SudokuRow(int rowIndex)
         {
             Cells = new ObservableCollection<SudokuCell>();
@@ -28,6 +33,15 @@ namespace wpfsudokulib.ViewModels
                 {
                     Cells.Add(new SudokuCell(false));
                 }
+            }
+        }
+
+        public SudokuRow(SudokuRow row)
+        {
+            Cells = new ObservableCollection<SudokuCell>();
+            for (int i = 0; i < 9; i++)
+            {
+                Cells.Add(new SudokuCell(row[i].Data, row[i].ReadOnly, row[i].Highlight));
             }
         }
 

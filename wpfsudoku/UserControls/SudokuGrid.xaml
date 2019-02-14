@@ -13,7 +13,7 @@
                   VerticalAlignment="Top"  HeadersVisibility="None" BorderBrush="Black"
                   FontSize="24" VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding SudokuBoardViewModel.Rows}"
                   HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False"
-                  AutoGenerateColumns="False" BeginningEdit="DgBoard_BeginningEdit" SelectedCellsChanged="DgBoard_SelectedCellsChanged">
+                  AutoGenerateColumns="False" BeginningEdit="DgBoard_BeginningEdit" SelectedCellsChanged="DgBoard_SelectedCellsChanged" CellEditEnding="DgBoard_CellEditEnding">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="36">
                     <DataGridTextColumn.ElementStyle>
