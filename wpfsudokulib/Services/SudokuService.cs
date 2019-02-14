@@ -7,16 +7,26 @@ using wpfsudokulib.Enums;
 
 namespace wpfsudokulib.Services
 {
+    /// <summary>
+    /// The main functionality of the sudoku game
+    /// </summary>
     public class SudokuService
     {
+        //Generates a new sudoku board
         public byte?[] GenerateNew(GameDifficulties difficulty)
         {
+            //Byte array used to store the board
             byte?[] SudokuBoard;
+
+            //Boards are generated until a valid one is generated (can be optimized)
             do
             {
+                //Initialize the sudoku board to 9x9=81
                 SudokuBoard = new byte?[81];
+                //Holds all possible numbers for a cell
                 var pencilMarks = new List<byte?>[81];
 
+                //Fill in the pencil marks with all numbers as in the beggining the board is empty
                 for (int i = 0; i < 81; i++)
                 {
                     pencilMarks[i] = new List<byte?>();
@@ -31,13 +41,20 @@ namespace wpfsudokulib.Services
 
                 for (int i = 0; i < 81; i++)
                 {
+                    //The cell's row
                     var row = i / 9;
+                    //The cell's column
                     var column = i % 9;
+                    //The starting row of the current sudoku block (3x3 square)
                     var blockRow = row / 3;
+                    //The starting column of the current sudoku block
                     var blockColumn = column / 3;
+                    //The cell's row relative to its block
                     var blockLocalRow = row % 3;
+                    //The cell's column relative to its block
                     var blockLocalColumn = column % 3;
 
+                    //Loop through all pencil marks until a good number is found
                     for (int index = 0; index < pencilMarks[i].Count; index++)
                     {
                         var value = pencilMarks[i][index];
@@ -98,6 +115,7 @@ namespace wpfsudokulib.Services
                             continue;
                         }
 
+                        //A good number was found
                         SudokuBoard[i] = value;
                         pencilMarks[i].Clear();
                         break;
@@ -138,17 +156,23 @@ namespace wpfsudokulib.Services
                 }
             }
             while (CheckBoard(SudokuBoard) == false);
+            //Loop until the board is full and valid
 
+            //Generate random bytes
             Random random = new Random();
             var randomNumber = new byte[1];
 
+            //Depending on the difficulty certain amont of the cells will be set to null
             switch (difficulty)
             {
                 case GameDifficulties.Hard:
                     for (int i = 0; i < 81; i += 9)
                     {
+                        //Gets a random byte number
                         random.NextBytes(randomNumber);
+                        //Makes it a valid sudoku number
                         randomNumber[0] %= 9;
+                        //Checks if the number can be found on the current row and removes if yes
                         for (int j = 0; j < 9; j++)
                         {
                             if (SudokuBoard[i + j] == randomNumber[0])
@@ -157,6 +181,7 @@ namespace wpfsudokulib.Services
                             }
                         }
 
+                        //Same logic for removing numbers
                         random.NextBytes(randomNumber);
                         randomNumber[0] %= 9;
                         for (int j = 0; j < 9; j++)
@@ -171,6 +196,7 @@ namespace wpfsudokulib.Services
                 case GameDifficulties.Medium:
                     for (int i = 0; i < 81; i += 9)
                     {
+                        //Same logic for removing numbers
                         random.NextBytes(randomNumber);
                         randomNumber[0] %= 9;
                         for (int j = 0; j < 9; j++)
@@ -181,6 +207,7 @@ namespace wpfsudokulib.Services
                             }
                         }
 
+                        //Same logic for removing numbers
                         random.NextBytes(randomNumber);
                         randomNumber[0] %= 9;
                         for (int j = 0; j < 9; j++)
@@ -195,6 +222,7 @@ namespace wpfsudokulib.Services
                 case GameDifficulties.Easy:   
                     for (int i = 0; i < 81; i += 9)
                     {
+                        //Same logic for removing numbers
                         random.NextBytes(randomNumber);
                         randomNumber[0] %= 9;
                         for (int j = 0; j < 9; j++)
@@ -205,6 +233,7 @@ namespace wpfsudokulib.Services
                             }
                         }
 
+                        //Same logic for removing numbers
                         randomNumber = new byte[1];
                         random.NextBytes(randomNumber);
                         randomNumber[0] %= 9;
@@ -219,13 +248,20 @@ namespace wpfsudokulib.Services
                     break;
             }
 
+            //Returns the new board as a byte array
             return SudokuBoard;
         }
 
+        /// <summary>
+        /// Check if a provided byte array is a solved sudoku board
+        /// </summary>
+        /// <param name="SudokuBoard">The sudoku board</param>
+        /// <returns></returns>
         public bool CheckBoard(byte?[] SudokuBoard)
         {
             for (int i = 0; i < 81; i++)
             {
+                //Same as in GenerateNew
                 var row = i / 9;
                 var column = i % 9;
                 var blockRow = row / 3;
@@ -233,6 +269,7 @@ namespace wpfsudokulib.Services
                 var blockLocalRow = row % 3;
                 var blockLocalColumn = column % 3;
 
+                //If an empty cell is found this means that the board is invalid
                 if (SudokuBoard[i] == null)
                 {
                     return false;
@@ -281,6 +318,7 @@ namespace wpfsudokulib.Services
                 }
             }
 
+            //Returns true if all the checks pass
             return true;
         }
     }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace wpfsudokulib.Enums
 {
+    /// <summary>
+    /// The GameDifficulties enum
+    /// </summary>
     public enum GameDifficulties
     {
         Easy,

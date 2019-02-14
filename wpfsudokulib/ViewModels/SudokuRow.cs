@@ -9,13 +9,23 @@ namespace wpfsudokulib.ViewModels
 {
     public class SudokuRow
     {        
+        /// <summary>
+        /// List of cells in the row
+        /// </summary>
         public ObservableCollection<SudokuCell> Cells { get; set; }
 
+        /// <summary>
+        /// Default construcotr (required by LiteDB)
+        /// </summary>
         public SudokuRow()
         {
 
         }
 
+        /// <summary>
+        /// Generates a properly highlight row
+        /// </summary>
+        /// <param name="rowIndex"></param>
         public SudokuRow(int rowIndex)
         {
             Cells = new ObservableCollection<SudokuCell>();
@@ -36,6 +46,10 @@ namespace wpfsudokulib.ViewModels
             }
         }
 
+        /// <summary>
+        /// Copy construcotor
+        /// </summary>
+        /// <param name="row"></param>
         public SudokuRow(SudokuRow row)
         {
             Cells = new ObservableCollection<SudokuCell>();
@@ -45,6 +59,11 @@ namespace wpfsudokulib.ViewModels
             }
         }
 
+        /// <summary>
+        /// Used for easier access to the row's cells
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public SudokuCell this[int i]
         {
             get { return Cells[i]; }

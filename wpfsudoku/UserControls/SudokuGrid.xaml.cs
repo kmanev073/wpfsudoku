@@ -54,7 +54,9 @@ namespace wpfsudoku.UserControls
         /// <param name="e"></param>
         private void DgBoard_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
+            //Convert the DataContext to MainViewModel 
             var mvm = DataContext as MainViewModel;
+            //Executes the command
             mvm.EditCellCommand.Execute(null);
         }
 
@@ -65,7 +67,9 @@ namespace wpfsudoku.UserControls
         /// <param name="e"></param>
         private void DgBoard_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
+            //Convert the DataContext to MainViewModel 
             var mvm = DataContext as MainViewModel;
+            //Make a deep copy of the sudoku's rows
             var rows = new List<SudokuRow>();
             for (int i = 0; i < 9; i++)
             {
