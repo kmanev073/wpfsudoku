@@ -17,8 +17,8 @@ namespace wpfsudokulib.ViewModels
     public class GameStateViewModel
     {
         private GameStateRepository _gameStateRepository;
-
-        private CancellationTokenSource TimerTokenSource { get; set; }
+        
+        private DispatcherTimer Timer { get; set; }
 
         public Guid GameId { get; set; }
         
@@ -49,8 +49,10 @@ namespace wpfsudokulib.ViewModels
             ElapsedSeconds = gameState.ElapsedSeconds;
 
             SetElapsedTime(ElapsedSeconds);
-
-            TimerTokenSource = new CancellationTokenSource();
+            
+            Timer = new DispatcherTimer();
+            Timer.Tick += new EventHandler(TimerTick);
+            Timer.Interval = new TimeSpan(0, 0, 1);
 
             LoadedGames = new ObservableCollection<GameState>(gameStateRepository.ListGames());
             
@@ -63,22 +65,18 @@ namespace wpfsudokulib.ViewModels
 
         public void StartTimer()
         {
-            Task.Run(TimerTick, TimerTokenSource.Token);
+            Timer.Start();
         }
 
         public void StopTimer()
         {
-            TimerTokenSource.Cancel();
+            Timer.Stop();
         }
 
-        private async Task TimerTick()
+        private void TimerTick(object sender, EventArgs e)
         {
-            while (true)
-            {
-                await Task.Delay(1000);
-                ElapsedSeconds++;
-                SetElapsedTime(ElapsedSeconds);
-            }   
+            ElapsedSeconds++;
+            SetElapsedTime(ElapsedSeconds);
         }
 
         private void SetElapsedTime(int elapsedSeconds)

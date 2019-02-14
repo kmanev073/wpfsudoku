@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfsudokulib;
 using wpfsudokulib.Repositories;
+using wpfsudokulib.Services;
 using wpfsudokulib.ViewModels;
 
 namespace wpfsudoku
@@ -29,7 +30,7 @@ namespace wpfsudoku
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModelsAccessor(new GameStateRepository("wpfsudoku.db"));
+            DataContext = new ViewModelsAccessor(new GameStateRepository("wpfsudoku.db"), new SudokuService());
         }
     }
 }

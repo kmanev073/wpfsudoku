@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using wpfsudokulib.Enums;
+using wpfsudokulib.Services;
 using wpfsudokulib.ViewModels;
 
 namespace wpfsudokulib.Models
@@ -25,22 +26,31 @@ namespace wpfsudokulib.Models
         public GameStatuses Status { get; set; }
 
         public byte?[] SudokuBoard { get; set; }
+        
+        public bool[] ReadOnly { get; set; }
 
         public GameState()
         {
 
         }
 
-        public GameState(GameDifficulties difficulty)
+        public GameState(SudokuService sudokuService, GameDifficulties difficulty)
         {
             Id = Guid.NewGuid();
             Difficulty = difficulty;
             Undo = new Stack<Move>();
             Redo = new Stack<Move>();
             Status = GameStatuses.Playing;
-            
-            SudokuBoard = new byte?[81];
-            //generate board
+            SudokuBoard = sudokuService.GenerateNew(difficulty);
+            ReadOnly = new bool[81];
+
+            for (int i = 0; i < 81; i++)
+            {
+                if (SudokuBoard[i].HasValue)
+                {
+                    ReadOnly[i] = true;
+                }
+            }
         }
 
         public GameState(GameStateViewModel gsViewModel, SudokuBoardViewModel sbViewModel)
@@ -53,12 +63,14 @@ namespace wpfsudokulib.Models
             Redo = gsViewModel.Redo;
             Status = gsViewModel.Status;
             SudokuBoard = new byte?[81];
+            ReadOnly = new bool[81];
 
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
                     SudokuBoard[i * 9 + j] = sbViewModel.Rows[i][j].Data;
+                    ReadOnly[i * 9 + j] = sbViewModel.Rows[i][j].ReadOnly;
                 }
             }
         }

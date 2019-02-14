@@ -26,6 +26,7 @@ namespace wpfsudokulib.ViewModels
                 for (int j = 0; j < 9; j++)
                 {
                     Rows[i][j].Data = gameState.SudokuBoard[i * 9 + j];
+                    Rows[i][j].ReadOnly = gameState.ReadOnly[i * 9 + j];
                 }
             }
         }

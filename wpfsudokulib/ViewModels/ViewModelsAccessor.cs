@@ -4,6 +4,7 @@ using wpfsudokulib.Commands;
 using wpfsudokulib.Enums;
 using wpfsudokulib.Models;
 using wpfsudokulib.Repositories;
+using wpfsudokulib.Services;
 using wpfsudokulib.ViewModels;
 
 namespace wpfsudokulib
@@ -12,6 +13,8 @@ namespace wpfsudokulib
     public class ViewModelsAccessor
     {
         private readonly GameStateRepository _gameStateRepository;
+
+        public readonly SudokuService SudokuService;
 
         public SudokuBoardViewModel SudokuBoardViewModel { get; set; }
 
@@ -27,9 +30,12 @@ namespace wpfsudokulib
 
         public GameCommand RedoCommand { get; private set; }
 
-        public ViewModelsAccessor(GameStateRepository gameStateRepository)
+        public GameCommand CheckCommand { get; private set; }
+
+        public ViewModelsAccessor(GameStateRepository gameStateRepository, SudokuService sudokuService)
         {
             _gameStateRepository = gameStateRepository;
+            SudokuService = sudokuService;
 
             SudokuBoardViewModel = new SudokuBoardViewModel();
             GameStateViewModel = new GameStateViewModel(gameStateRepository, new GameState());
@@ -39,25 +45,28 @@ namespace wpfsudokulib
             LoadGameCommand = new GameCommand(LoadGame);
             UndoCommand = new GameCommand(Undo);
             RedoCommand = new GameCommand(Redo);
+            CheckCommand = new GameCommand(Check);
         }
 
         private void StartGame()
         {
             GameStateViewModel.StopTimer();
-            var newGame = new GameState(GameStateViewModel.Difficulty);
+            var newGame = new GameState(SudokuService, GameStateViewModel.Difficulty);
             GameStateViewModel = new GameStateViewModel(_gameStateRepository, newGame);
             SudokuBoardViewModel = new SudokuBoardViewModel(newGame);
             GameStateViewModel.StartTimer();
         }
-
+        
         private void SaveGame()
         {
-            if (GameStateViewModel.Status == GameStatuses.Playing)
+            if (GameStateViewModel.Status == GameStatuses.NotStarted)
             {
-                _gameStateRepository.SaveGame(new GameState(GameStateViewModel, SudokuBoardViewModel));
-                GameStateViewModel.LoadedGames = new ObservableCollection<GameState>(_gameStateRepository.ListGames());
-                GameStateViewModel.SelectedGameId = null;
+                return;
             }
+            
+            _gameStateRepository.SaveGame(new GameState(GameStateViewModel, SudokuBoardViewModel));
+            GameStateViewModel.LoadedGames = new ObservableCollection<GameState>(_gameStateRepository.ListGames());
+            GameStateViewModel.SelectedGameId = null;
         }
 
         private void LoadGame()
@@ -71,19 +80,46 @@ namespace wpfsudokulib
             var loadedGame = _gameStateRepository.LoadGame(GameStateViewModel.SelectedGameId.Value);
             GameStateViewModel = new GameStateViewModel(_gameStateRepository, loadedGame);
             SudokuBoardViewModel = new SudokuBoardViewModel(loadedGame);
-            GameStateViewModel.StartTimer();
+            if (GameStateViewModel.Status == GameStatuses.Playing)
+            {
+                GameStateViewModel.StartTimer();
+            }
 
             GameStateViewModel.SelectedGameId = null;
         }
 
         private void Undo()
         {
-
+            if (GameStateViewModel.Status != GameStatuses.Playing)
+            {
+                return;
+            }
         }
-
         private void Redo()
         {
+            if (GameStateViewModel.Status != GameStatuses.Playing)
+            {
+                return;
+            }
+        }
+        
+        private void Check()
+        {
+            var board = new byte?[81];
 
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    board[i * 9 + j] = SudokuBoardViewModel.Rows[i][j].Data;
+                }
+            }
+            
+            if (SudokuService.CheckBoard(board))
+            {
+                GameStateViewModel.Status = GameStatuses.Finished;
+                GameStateViewModel.StopTimer();
+            }
         }
     }
 }

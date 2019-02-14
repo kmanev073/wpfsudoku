@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfsudokulib;
+using wpfsudokulib.Enums;
 using wpfsudokulib.ViewModels;
 
 namespace wpfsudoku.UserControls
@@ -34,6 +36,12 @@ namespace wpfsudoku.UserControls
             {
                 e.Cancel = true;
             }
+        }
+
+        private void DgBoard_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            var vma = DataContext as ViewModelsAccessor;
+            vma.CheckCommand.Execute(null);
         }
     }
 }
