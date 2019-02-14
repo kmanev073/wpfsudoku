@@ -8,11 +8,17 @@ using System.Threading.Tasks;
 namespace wpfsudokulib.ViewModels
 {
     public class SudokuRow
-    {        
+    {
+        #region PublicProperties
+
         /// <summary>
         /// List of cells in the row
         /// </summary>
         public ObservableCollection<SudokuCell> Cells { get; set; }
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Default construcotr (required by LiteDB)
@@ -59,6 +65,10 @@ namespace wpfsudokulib.ViewModels
             }
         }
 
+        #endregion
+
+        #region Indexers
+
         /// <summary>
         /// Used for easier access to the row's cells
         /// </summary>
@@ -68,6 +78,8 @@ namespace wpfsudokulib.ViewModels
         {
             get { return Cells[i]; }
             set { Cells[i] = value; }
+
         }
+        #endregion
     }
 }

@@ -15,6 +15,8 @@ namespace wpfsudokulib.Models
     /// </summary>
     public class GameState
     {
+        #region PublicProperties
+
         /// <summary>
         /// The Id of the game
         /// </summary>
@@ -59,6 +61,10 @@ namespace wpfsudokulib.Models
         /// Boolean array showing if a cell should be readonly
         /// </summary>
         public bool[] ReadOnly { get; set; }
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Default constructor (Required by LiteDB)
@@ -118,5 +124,7 @@ namespace wpfsudokulib.Models
                 }
             }
         }
+
+        #endregion
     }
 }

@@ -13,6 +13,8 @@ namespace wpfsudokulib.Repositories
     /// </summary>
     public class GameStateRepository
     {
+        #region PrivateProperties
+
         /// <summary>
         /// Database instance
         /// </summary>
@@ -24,6 +26,10 @@ namespace wpfsudokulib.Repositories
         private LiteCollection<GameState> Collection
             => _database.GetCollection<GameState>("Games");
 
+        #endregion
+
+        #region Construcotrs
+
         /// <summary>
         /// Constructor used to setup the database
         /// </summary>
@@ -32,6 +38,10 @@ namespace wpfsudokulib.Repositories
         {
             _database = new LiteDatabase(databaseName);
         }
+
+        #endregion
+
+        #region PublicMethods
 
         /// <summary>
         /// Saves a GameState to LiteDB
@@ -55,5 +65,7 @@ namespace wpfsudokulib.Repositories
         /// <returns></returns>
         public IEnumerable<GameState> ListGames()
             => Collection.FindAll().OrderBy(savedGame => savedGame.SaveTimestamp).Reverse();
+
+        #endregion
     }
 }

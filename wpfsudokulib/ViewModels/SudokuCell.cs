@@ -13,7 +13,8 @@ namespace wpfsudokulib.ViewModels
     /// </summary>
     [AddINotifyPropertyChangedInterface]
     public class SudokuCell
-    {        
+    {
+        #region PublicProperties
         /// <summary>
         /// The data of the cell, can be null if the cell is empty
         /// </summary>
@@ -28,6 +29,10 @@ namespace wpfsudokulib.ViewModels
         /// True if the cell's background is blue
         /// </summary>
         public bool Highlight { get; set; }
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Default constructor (required by LiteDB)
@@ -60,5 +65,7 @@ namespace wpfsudokulib.ViewModels
             ReadOnly = true;
             Highlight = highlight;
         }
+
+        #endregion
     }
 }

@@ -19,6 +19,8 @@ namespace wpfsudokulib.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class GameStateViewModel
     {
+        #region PrivateProperties
+
         /// <summary>
         /// The repository used to store the game in LiteDB
         /// </summary>
@@ -28,6 +30,10 @@ namespace wpfsudokulib.ViewModels
         /// Timer used for counting the elapsed time
         /// </summary>
         private DispatcherTimer Timer { get; set; }
+
+        #endregion
+
+        #region PublicProperties
 
         /// <summary>
         /// The id of the game used as id in LiteDB too
@@ -74,6 +80,10 @@ namespace wpfsudokulib.ViewModels
         /// </summary>
         public GameStatuses Status { get; set; }
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         /// Constructor used for starting new games or loading old ones
         /// </summary>
@@ -104,6 +114,10 @@ namespace wpfsudokulib.ViewModels
             Status = gameState.Status;
         }
 
+        #endregion
+
+        #region PublicMethods
+
         /// <summary>
         /// Used to start the time counter
         /// </summary>
@@ -119,6 +133,10 @@ namespace wpfsudokulib.ViewModels
         {
             Timer.Stop();
         }
+
+        #endregion
+
+        #region PrivateMethods
 
         /// <summary>
         /// Called each second
@@ -142,5 +160,7 @@ namespace wpfsudokulib.ViewModels
             var hours = ElapsedSeconds / 3600;
             ElapsedTime = $"{(hours > 9 ? "" : "0")}{hours}:{(minutes > 9 ? "" : "0")}{minutes}:{(seconds > 9 ? "" : "0")}{seconds}";
         }
+
+        #endregion
     }
 }

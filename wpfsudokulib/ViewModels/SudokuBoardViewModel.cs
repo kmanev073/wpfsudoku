@@ -14,10 +14,16 @@ namespace wpfsudokulib.ViewModels
     /// </summary>
     public class SudokuBoardViewModel
     {
+        #region PublicProperties
+
         /// <summary>
         /// Holds all the rows displayed in the data grid
         /// </summary>
         public ObservableCollection<SudokuRow> Rows { get; set; }
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Default constructor
@@ -51,6 +57,10 @@ namespace wpfsudokulib.ViewModels
             }
         }
 
+        #endregion
+
+        #region Indexers
+
         /// <summary>
         /// Used for easier access to the row list
         /// </summary>
@@ -62,6 +72,9 @@ namespace wpfsudokulib.ViewModels
             set { Rows[i] = value; }
         }
 
+        #endregion
+
+        #region PrivateMethods
 
         /// <summary>
         /// Allocates the row list
@@ -74,5 +87,7 @@ namespace wpfsudokulib.ViewModels
                 Rows.Add(new SudokuRow(i));
             }
         }
+
+        #endregion
     }
 }

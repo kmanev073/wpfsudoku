@@ -12,7 +12,13 @@ namespace wpfsudokulib.Services
     /// </summary>
     public class SudokuService
     {
-        //Generates a new sudoku board
+        #region PublicMethods
+
+        /// <summary>
+        /// Generates a new sudoku board
+        /// </summary>
+        /// <param name="difficulty"></param>
+        /// <returns></returns>
         public byte?[] GenerateNew(GameDifficulties difficulty)
         {
             //Byte array used to store the board
@@ -251,7 +257,7 @@ namespace wpfsudokulib.Services
             //Returns the new board as a byte array
             return SudokuBoard;
         }
-
+        
         /// <summary>
         /// Check if a provided byte array is a solved sudoku board
         /// </summary>
@@ -321,5 +327,7 @@ namespace wpfsudokulib.Services
             //Returns true if all the checks pass
             return true;
         }
+
+        #endregion
     }
 }

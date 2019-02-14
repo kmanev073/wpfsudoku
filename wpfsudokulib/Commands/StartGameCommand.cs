@@ -12,11 +12,17 @@ namespace wpfsudokulib.Commands
     /// </summary>
     public class GameCommand : ICommand
     {
+        #region PrivateProperties
+
         /// <summary>
         /// The action (method) to be executed by the command
         /// </summary>
         private Action Action;
-        
+
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         /// Sets the private action variable so it can be used later
         /// </summary>
@@ -25,6 +31,10 @@ namespace wpfsudokulib.Commands
         {
             Action = action;
         }
+
+        #endregion
+
+        #region PublicMethods
 
         /// <summary>
         /// Never used because CanExecute never changes
@@ -49,5 +59,7 @@ namespace wpfsudokulib.Commands
         {
             Action.Invoke();
         }
+
+        #endregion
     }
 }

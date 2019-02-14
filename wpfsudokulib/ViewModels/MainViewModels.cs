@@ -16,10 +16,16 @@ namespace wpfsudokulib
     [AddINotifyPropertyChangedInterface]
     public class MainViewModel
     {
+        #region PrivateProperties
+
         /// <summary>
         /// The repository used to store the game states in LiteDB
         /// </summary>
         private readonly GameStateRepository _gameStateRepository;
+
+        #endregion
+
+        #region PublicProperties
 
         /// <summary>
         /// The sudoku serives used for generating and checking sudoku boards
@@ -66,6 +72,10 @@ namespace wpfsudokulib
         /// </summary>
         public GameCommand EditCellCommand { get; private set; }
 
+        #endregion
+
+        #region Construcotors
+
         /// <summary>
         /// Used to initialize the readonly properties, view models and the commands
         /// </summary>
@@ -86,6 +96,10 @@ namespace wpfsudokulib
             RedoCommand = new GameCommand(Redo);
             EditCellCommand = new GameCommand(EditCell);
         }
+
+        #endregion
+
+        #region PrivateMethods
 
         /// <summary>
         /// Executed by the StartGameCommand
@@ -252,5 +266,7 @@ namespace wpfsudokulib
                 return;
             }
         }
+
+        #endregion
     }
 }
