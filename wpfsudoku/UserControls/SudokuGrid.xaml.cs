@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfsudokulib.ViewModels;
 
-namespace wpfsudoku.Controls
+namespace wpfsudoku.UserControls
 {
     /// <summary>
     /// Interaction logic for SudokuGrid.xaml
@@ -25,7 +26,7 @@ namespace wpfsudoku.Controls
         {
             InitializeComponent();
         }
-
+        
         private void DgBoard_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
             var row = e.Row.Item as SudokuRow;

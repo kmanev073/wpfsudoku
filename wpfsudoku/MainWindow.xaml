@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfsudoku"
-        xmlns:controls="clr-namespace:wpfsudoku.Controls"
-        mc:Ignorable="d" Title="wpfsudoku" Height="374" Width="481" Icon="sudoku.ico"
-        ResizeMode="CanMinimize">
+        xmlns:controls="clr-namespace:wpfsudoku.UserControls"
+        mc:Ignorable="d" Title="wpfsudoku by Kaloyan Manev" Height="374" Width="482"
+        Icon="sudoku.ico" ResizeMode="CanMinimize">
     <Grid>
-        <controls:GameControls Margin="346,10,0,0"/>
-        <controls:SudokuGrid DataContext="{Binding SudokuBoardViewModel}" x:Name="sudokuGrid" Margin="10,10,128,10"/>
+        <controls:GameControls DataContext="{Binding}" x:Name="gameControls" Margin="346,10,0,0"/>
+        <controls:SudokuGrid DataContext="{Binding}" x:Name="sudokuGrid" Margin="10,10,128,10"/>
     </Grid>
 </Window>

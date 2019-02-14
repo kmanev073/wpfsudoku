@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,22 +8,15 @@ using System.Threading.Tasks;
 
 namespace wpfsudokulib.ViewModels
 {
-    public class SudokuCell : INotifyPropertyChanged
-    {
-        private byte? data;
-        
-        public byte? Data
-        {
-            get { return data; }
-            set { data = value; }
-        }
+    [AddINotifyPropertyChangedInterface]
+    public class SudokuCell
+    {        
+        public byte? Data { get; set; }
 
         public bool ReadOnly { get; set; }
 
         public bool Highlight { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        
         public SudokuCell(byte? data, bool readOnly, bool highlight)
         {
             Data = data;
@@ -33,7 +27,7 @@ namespace wpfsudokulib.ViewModels
         public SudokuCell(bool highlight)
         {
             Data = null;
-            ReadOnly = false;
+            ReadOnly = true;
             Highlight = highlight;
         }
     }

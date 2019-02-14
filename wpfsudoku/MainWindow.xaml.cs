@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfsudokulib;
+using wpfsudokulib.Repositories;
 using wpfsudokulib.ViewModels;
 
 namespace wpfsudoku
@@ -25,12 +26,10 @@ namespace wpfsudoku
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ViewModelsAccessor vma { get; set; }
-
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModelsAccessor();
+            DataContext = new ViewModelsAccessor(new GameStateRepository("wpfsudoku.db"));
         }
     }
 }
