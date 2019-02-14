@@ -195,16 +195,6 @@ namespace wpfsudokulib.Services
                 case GameDifficulties.Easy:   
                     for (int i = 0; i < 81; i += 9)
                     {
-                        /*random.NextBytes(randomNumber);
-                        randomNumber[0] %= 9;
-                        for (int j = 0; j < 9; j++)
-                        {
-                            if (SudokuBoard[i + j] == randomNumber[0])
-                            {
-                                SudokuBoard[i + j] = null;
-                            }
-                        }
-
                         random.NextBytes(randomNumber);
                         randomNumber[0] %= 9;
                         for (int j = 0; j < 9; j++)
@@ -213,7 +203,7 @@ namespace wpfsudokulib.Services
                             {
                                 SudokuBoard[i + j] = null;
                             }
-                        }*/
+                        }
 
                         randomNumber = new byte[1];
                         random.NextBytes(randomNumber);
